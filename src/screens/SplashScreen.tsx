@@ -1,16 +1,18 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {Animated, Image, StyleSheet, Text, View} from 'react-native';
-import {theme} from '../theme/theme';
+import { AppContext } from '../contexts/AppContext';
+import { ThemeType } from '../types/themeTypes';
+import { darkTheme } from '../theme/theme';
 
 interface props {
   showSplash: boolean;
 }
 
+
 export const SplashScreen: React.FC<props> = ({showSplash}) => {
+  const styles = styleSheet(useContext(AppContext));
   const [fadeOut, setFadeOut] = useState<Animated.Value>(new Animated.Value(1));
   const [fadeOutImage, setFadeOutImage] = useState<Animated.Value>(new Animated.Value(1));
-
-
   useEffect(() => {
     if (!showSplash) {
       Animated.timing(fadeOut, {
@@ -35,7 +37,7 @@ export const SplashScreen: React.FC<props> = ({showSplash}) => {
   );
 };
 
-const styles = StyleSheet.create({
+const styleSheet = (theme:ThemeType) => StyleSheet.create({
   container: {
     position: 'absolute',
     width: '100%',
@@ -49,7 +51,7 @@ const styles = StyleSheet.create({
     height: 160,
   },
   text: {
-    color: theme.colors.textVariant,
+    color: 'white',
     fontWeight: 'bold',
     fontSize: 26,
   },

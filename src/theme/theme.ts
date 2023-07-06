@@ -1,22 +1,42 @@
-export const theme = {
-  colors: {
-    primary: '#47b5ff',
-    primaryVariant: '#06283d',
-    highlight: '#1d73e5',
-    secondary: '#ffc738',
-    secondaryVariant: '#ffa700',
-    background: '#ecf7ff',
-    text: '#000',
-    textVariant: '#fff'
-  },
+import { Colors } from "react-native/Libraries/NewAppScreen"
+import { ThemeType, BaseThemeType} from '../types/themeTypes';
+
+const baseTheme :BaseThemeType= {
   fontSizes: {
-    body: 14,
-    title: 16
+    body: 16,
+    title: 18,
+    bigTitle: 28
   },
   fontWeights: {
     light: '200',
     regular: '400',
     semibold: '500',
     bold: 'bold'
+  }
+}
+
+export const lightTheme : ThemeType = {
+  ...baseTheme,
+  colors: {
+    primary: '#47b5ff',
+    primaryVariant: '#06283d',
+    highlight: '#1d73e5',
+    secondary: '#ffc738',
+    secondaryVariant: '#ffa700',
+    background: Colors.lighter,
+    text: '#444',
+  }
+}
+
+export const darkTheme : ThemeType = {
+  ...baseTheme,
+  colors: {
+    primary: '#47b5ff',
+    primaryVariant: '#06283d',
+    highlight: '#1d73e5',
+    secondary: '#ffc738',
+    secondaryVariant: '#ffa700',
+    background: Colors.darker,
+    text: '#fff',
   }
 }

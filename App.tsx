@@ -5,40 +5,50 @@
  * @format
  */
 
-import React, { useEffect, useState } from 'react';
-import { Animated, SafeAreaView, StatusBar, StyleSheet, useColorScheme } from 'react-native';
-import { Colors } from 'react-native/Libraries/NewAppScreen';
-import { MainScreen } from './src/screens/MainScreen';
-import { SplashScreen } from './src/screens/SplashScreen';
-import { theme } from './src/theme/theme';
-import { CustomStatusBar } from './src/components/CustomStatusBar';
-
+import React, {createContext, useEffect, useState} from 'react';
+import {
+  Animated,
+  SafeAreaView,
+  StatusBar,
+  StyleSheet,
+  useColorScheme,
+} from 'react-native';
+import {Colors} from 'react-native/Libraries/NewAppScreen';
+import {SplashScreen} from './src/screens/SplashScreen';
+import {darkTheme, lightTheme} from './src/theme/theme';
+import {CustomStatusBar} from './src/components/CustomStatusBar';
+import {PostsScreen} from './src/screens/posts/PostsScreen';
+import { AppContext } from './src/contexts/AppContext';
 
 function App(): JSX.Element {
   const [showSplash, setShowSplash] = useState<boolean>(true);
-  const StatusBarAnimated = Animated.createAnimatedComponent(StatusBar);
+  const [theme, setTheme] = useState(
+    useColorScheme() == 'dark' ? darkTheme : lightTheme,
+  );
+
+
 
   useEffect(() => {
-    setTimeout(() => { 
+    setTimeout(() => {
       setShowSplash(false);
-    }, 1000)
-
-  }, [])
+    }, 1000);
+  }, []);
 
   return (
-    <SafeAreaView style={styles.container}>
-      <CustomStatusBar showSplash={showSplash}/>
-      {/* <MainScreen/> */}
-      <SplashScreen showSplash = {showSplash} />
-
-    </SafeAreaView>
+    <AppContext.Provider value={theme}>
+      <SafeAreaView style={styles.container}>
+        <CustomStatusBar showSplash={showSplash} />
+        <PostsScreen />
+        <SplashScreen showSplash={showSplash} />
+      </SafeAreaView>
+    </AppContext.Provider>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
-  }
-})
+    flex: 1,
+  },
+});
 
 export default App;
