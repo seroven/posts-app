@@ -13,6 +13,7 @@ export const SplashScreen: React.FC<props> = ({showSplash}) => {
   const styles = styleSheet(useContext(AppContext));
   const [fadeOut, setFadeOut] = useState<Animated.Value>(new Animated.Value(1));
   const [fadeOutImage, setFadeOutImage] = useState<Animated.Value>(new Animated.Value(1));
+  const [hidden, setHidden] = useState<boolean>(false);
   useEffect(() => {
     if (!showSplash) {
       Animated.timing(fadeOut, {
@@ -26,11 +27,15 @@ export const SplashScreen: React.FC<props> = ({showSplash}) => {
         duration: 300,
         useNativeDriver: true
       }).start();
+
+      setTimeout(() => {
+        setHidden(true);
+      }, 1000);
     }
   }, [showSplash]);
 
   return (
-    <Animated.View style={[ styles.container, {opacity: fadeOut}]}>
+    <Animated.View style={[ styles.container, {opacity: fadeOut}, hidden && {display: 'none'}]}>
       <Animated.Image style={[ styles.image, {opacity: fadeOutImage}]} source={require('../../assets/logo.png')} />
       <Text style={styles.text}>PostsApp</Text>
     </Animated.View>
