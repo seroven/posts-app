@@ -19,6 +19,7 @@ export interface ColorsType {
   secondaryVariant: string;
   background: string;
   text: string;
+  shadow: string;
 }
 
 export interface ThemeType {

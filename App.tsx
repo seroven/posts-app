@@ -25,9 +25,7 @@ function App(): JSX.Element {
   const [theme, setTheme] = useState(
     useColorScheme() == 'dark' ? darkTheme : lightTheme,
   );
-
-
-
+  
   useEffect(() => {
     setTimeout(() => {
       setShowSplash(false);

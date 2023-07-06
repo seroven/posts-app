@@ -3,8 +3,8 @@ import { ThemeType, BaseThemeType} from '../types/themeTypes';
 
 const baseTheme :BaseThemeType= {
   fontSizes: {
-    body: 16,
-    title: 18,
+    body: 14,
+    title: 16,
     bigTitle: 28
   },
   fontWeights: {
@@ -25,6 +25,7 @@ export const lightTheme : ThemeType = {
     secondaryVariant: '#ffa700',
     background: Colors.lighter,
     text: '#444',
+    shadow: '#555'
   }
 }
 
@@ -38,5 +39,6 @@ export const darkTheme : ThemeType = {
     secondaryVariant: '#ffa700',
     background: Colors.darker,
     text: '#fff',
+    shadow: '#ddd'
   }
 }

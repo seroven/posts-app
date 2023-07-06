@@ -5,6 +5,8 @@ import {AppContext} from '../../contexts/AppContext';
 import {ThemeType} from '../../types/themeTypes';
 import {PostType} from '../../types/postsTypes';
 import axios from 'axios';
+import {PostListSeparator} from './PostListSeparator';
+import {PostItem} from './PostItem';
 
 export const PostsScreen = () => {
   const styles = styleSheet(useContext(AppContext));
@@ -25,8 +27,9 @@ export const PostsScreen = () => {
       <FlatList
         style={styles.list}
         data={posts}
+        ItemSeparatorComponent={PostListSeparator}
         renderItem={({item}) => (
-          <Text key={item.id} style={{marginVertical: 8}}>{item.title}</Text>
+          <PostItem key={item.id} item={item} />
         )}></FlatList>
     </View>
   );
@@ -37,7 +40,6 @@ const styleSheet = (theme: ThemeType) =>
     container: {
       flex: 1,
       backgroundColor: theme.colors.background,
-
     },
     title: {
       color: theme.colors.text,
@@ -47,6 +49,6 @@ const styleSheet = (theme: ThemeType) =>
       textAlign: 'center',
     },
     list: {
-      paddingHorizontal: 24
-    }
+      marginHorizontal: 24,
+    },
   });
